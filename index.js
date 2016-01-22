@@ -3,7 +3,6 @@ var express = require('express'),
 	mongoose = require('mongoose'),
   	db = require('./models'),
 	path = require("path");
-
 var	app = express(),
 	views = path.join(__dirname, "views");
 
