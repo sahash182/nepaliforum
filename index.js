@@ -10,11 +10,7 @@ var	app = express(),
 app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
-app.get("/", function (req, res) {
-	res.send(" This site is under Constuction");
-});
-
-app.get("/home", function(req, res){
+app.get("/", function(req, res){
 	var homePath = path.join(views, "index.html");
 	res.sendFile(homePath);
 });
