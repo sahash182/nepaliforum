@@ -2,7 +2,9 @@
 var express = require('express'),
 	mongoose = require('mongoose'),
   	db = require('./models'),
-	path = require("path");
+	path = require("path"),
+	bodyParser = require("body-parser"),
+    _ = require("underscore");
 var	app = express(),
 	views = path.join(__dirname, "views");
 
@@ -14,6 +16,7 @@ app.get("/", function(req, res){
 	var homePath = path.join(views, "index.html");
 	res.sendFile(homePath);
 });
+
 app.get("/classifieds", function(req,res){
 	var classifiedPath = path.join(views, "classified.html");
 	res.sendFile(classifiedPath);

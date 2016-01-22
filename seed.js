@@ -5,3 +5,9 @@ db.Book.create({name:"shiva", email:"shiva@gmail.com"}, function(err, user) {
 	console.log("Added everything");
 	process.exit(0);
 })
+
+var classified = {
+	types:[
+	  {name: "jobs"},
+	  { name: "Housing"}
+];
