@@ -14,6 +14,10 @@ app.get("/", function(req, res){
 	var homePath = path.join(views, "index.html");
 	res.sendFile(homePath);
 });
+app.get("/classifieds", function(req,res){
+	var classifiedPath = path.join(views, "classified.html");
+	res.sendFile(classifiedPath);
+})
 
 
 //start the server
