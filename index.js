@@ -26,20 +26,19 @@ app.get('/', function(req, res) {
 
 //serving signup form
 app.get('/signup', function(req, res) {
-  // console.log('hello')
   res.sendFile(__dirname + "/views/signup.html");
 });
 
+//serving login form
+app.get('/login', function(req, res) {
+  res.sendFile(__dirname + "/views/login.html");
+});
 
 ///////////////////////////ROUTES/////////////////////////////////////
 // AUTH ROUTES (SIGN UP, LOG IN, LOG OUT)
 
-//route to get user
-
 // create new user with secure password
 app.post('/signup', function (req, res) {
-	// var hello = req.body.userObj;
-	// console.log(hello);
    var newUser = new User({
    	 // console.log(req.body);
       userName: req.body.userName,
@@ -56,14 +55,6 @@ app.post('/signup', function (req, res) {
     // log in user immediately when created
   });
 });
-
-
-
-
-
-
-
-
 
 //start the server
 app.listen(3000, function() {
