@@ -1,26 +1,68 @@
 //requirements
 var express = require('express'),
-	mongoose = require('mongoose'),
-  	db = require('./models'),
-	path = require("path"),
-	bodyParser = require("body-parser"),
-    _ = require("underscore");
-var	app = express(),
-	views = path.join(__dirname, "views");
+		mongoose = require('mongoose'),
+		db = require('./models'),
+		path = require("path"),
+		bodyParser = require("body-parser"),
+		_ = require("underscore"),
+		app = express();
+// views = path.join(__dirname, "views");
+
+//User model defined.
+var User = require('./models/user');
+
+//middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 // assets
 app.use("/static", express.static("public"));
 app.use("/vendor", express.static("bower_components"));
 
-app.get("/", function(req, res){
-	var homePath = path.join(views, "index.html");
-	res.sendFile(homePath);
+// //serving index.html HomePage
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/classifieds", function(req,res){
-	var classifiedPath = path.join(views, "classified.html");
-	res.sendFile(classifiedPath);
-})
+//serving signup form
+app.get('/signup', function(req, res) {
+  // console.log('hello')
+  res.sendFile(__dirname + "/views/signup.html");
+});
+
+
+///////////////////////////ROUTES/////////////////////////////////////
+// AUTH ROUTES (SIGN UP, LOG IN, LOG OUT)
+
+//route to get user
+
+// create new user with secure password
+app.post('/signup', function (req, res) {
+	// var hello = req.body.userObj;
+	// console.log(hello);
+   var newUser = new User({
+   	 // console.log(req.body);
+      userName: req.body.userName,
+      email: req.body.email,
+      password: req.body.password
+   });
+
+   User.createSecure(newUser, function (err, user) {
+     // log in user immediately when created
+      // req.login(user);
+      console.log(user);
+      res.send(user);
+      res.redirect('/');
+    // log in user immediately when created
+  });
+});
+
+
+
+
+
+
+
 
 
 //start the server
